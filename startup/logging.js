@@ -1,7 +1,5 @@
-const appConfig = require('config');
-const { config } = require('winston');
+const config = require('config');
 const winston = require('winston');
-require('winston-mongodb');
 require('express-async-errors');
 
 module.exports = function (app) {
@@ -39,12 +37,4 @@ module.exports = function (app) {
       handleRejections: true
     }));
   }
-
-  winston.add(new winston.transports.MongoDB({
-    level: 'error',
-    db: appConfig.get('database.configurationString'),
-    handleExceptions: true,
-    handleRejections: true,
-    options: { useUnifiedTopology: true }
-  }));
 }
