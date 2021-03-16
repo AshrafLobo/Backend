@@ -2,10 +2,15 @@
  * Imports
  */
 const express = require('express');
+const _ = require('lodash');
+
 const router = express();
 
 // Timeline Model
 const Timeline = require('../models/timeline');
+
+// Middleware
+const auth = require('../middleware/auth');
 
 // Timeline validator
 const { validateTimeline: validate } = require('../common/joiValidators');
@@ -21,45 +26,37 @@ router.get('/', async (req, res) => {
 });
 
 // Get one timeline
-// router.get('/:timelineId', async (req, res) => {
-//   const timeline = await Timeline.findById(req.params.timelineId);
+router.get('/:timelineId', async (req, res) => {
+  const timeline = await Timeline.findById(req.params.timelineId);
 
-//   if (!timeline) return res.status(404).send('The timeline with the given ID was not found');
-//   res.send(timeline);
-// });
+  if (!timeline) return res.status(404).send('The timeline with the given ID was not found');
+  res.send(timeline);
+});
 
 // Add a new timeline
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  const timeline = new Timeline({
-    title: req.body.title,
-    description: req.body.description,
-    timelineDate: req.body.timelineDate
-  });
-
+  const timeline = new Timeline(_.pick(req.body, ['title', 'description', 'timelineDate']));
   await timeline.save();
+
   res.send(timeline);
 });
 
 // Update a timeline
-router.put('/:testimonialId', async (req, res) => {
+router.put('/:testimonialId', auth, async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  const timeline = await Timeline.findByIdAndUpdate(req.params.testimonialId, {
-    title: req.body.title,
-    description: req.body.description,
-    timelineDate: req.body.timelineDate
-  }, { new: true });
+  const timeline = await Timeline.findByIdAndUpdate(req.params.timelineId, _.pick(req.body, ['title', 'description', 'timelineDate']), { new: true })
   if (!timeline) return res.status(404).send('The timeline with the given ID was not found');
 
   res.send(timeline);
 });
 
 // Delete a timeline
-router.delete('/:testimonialId', async (req, res) => {
+router.delete('/:testimonialId', auth, async (req, res) => {
   const testimonial = await Timeline.findByIdAndDelete(req.params.testimonialId);
   if (!testimonial) return res.status(404).send('The testimonial with the given ID was not found');
 

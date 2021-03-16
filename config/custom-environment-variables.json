@@ -1,5 +1,6 @@
 {
   "database": {
-    "configurationString": "app-configurationString"
-  }
+    "configurationString": "crk_configurationString"
+  },
+  "jwtPrivateKey": "crk_jwtPrivateKey"
 }

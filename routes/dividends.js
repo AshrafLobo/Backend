@@ -2,11 +2,15 @@
  * Imports
  */
 const express = require('express');
+const _ = require('lodash');
 const router = express();
 
 // Models
 const Dividend = require('../models/dividend');
 const Issuer = require('../models/issuer');
+
+// Middleware
+const auth = require('../middleware/auth');
 
 // Dividend validator
 const { validateDividend: validate } = require('../common/joiValidators');
@@ -17,8 +21,16 @@ const { validateDividend: validate } = require('../common/joiValidators');
 
 // Get all dividends
 router.get('/', async (req, res) => {
+  let filter = {};
+
+  if (req.query.issuerId) {
+    filter["issuer"] = {
+      _id: req.query.issuerId
+    };
+  }
+
   const dividends = await Dividend
-    .find()
+    .find(filter)
     .populate('issuer', 'name');
 
   res.send(dividends);
@@ -35,7 +47,7 @@ router.get('/:dividendId', async (req, res) => {
 });
 
 // Add new dividend
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -43,22 +55,15 @@ router.post('/', async (req, res) => {
   const issuer = await Issuer.findById(req.body.issuerId);
   if (!issuer) return res.status(400).send("Invalid issuer.");
 
-  const dividend = new Dividend({
-    issuer: issuer._id,
-    bookClosureDate: req.body.bookClosureDate,
-    disbursmentDate: req.body.disbursmentDate,
-    dividendType: req.body.dividendType,
-    dividendRate: req.body.dividendRate,
-    status: req.body.status,
-    dateUpdated: req.body.dateUpdated
-  });
-
+  let dividend = new Dividend(_.pick(req.body, ['bookClosureDate', 'disbursmentDate', 'dividendType', 'dividendRate', 'status']))
+  dividend.issuer = issuer._id;
   await dividend.save();
+
   res.send(dividend);
 });
 
 // Update dividend
-router.put('/:dividendId', async (req, res) => {
+router.put('/:dividendId', auth, async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -66,22 +71,16 @@ router.put('/:dividendId', async (req, res) => {
   const issuer = await Issuer.findById(req.body.issuerId);
   if (!issuer) return res.status(400).send("Invalid issuer.");
 
-  const dividend = await Dividend.findByIdAndUpdate(req.params.dividendId, {
-    issuer: issuer._id,
-    bookClosureDate: req.body.bookClosureDate,
-    disbursmentDate: req.body.disbursmentDate,
-    dividendType: req.body.dividendType,
-    dividendRate: req.body.dividendRate,
-    status: req.body.status,
-    dateUpdated: req.body.dateUpdated
-  }, { new: true });
+  let dividend = _.pick(req.body, ['title', 'agmDate', 'venue', 'status']);
+  dividend.issuer = issuer._id;
+  dividend = await Dividend.findByIdAndUpdate(req.params.dividendId, dividend, { new: true });
   if (!dividend) return res.status(404).send('The Dividend with the given ID was not found');
 
   res.send(dividend);
 });
 
 // Delete dividend
-router.delete('/:dividendId', async (req, res) => {
+router.delete('/:dividendId', auth, async (req, res) => {
   const dividend = await Dividend.findByIdAndDelete(req.params.dividendId);
   if (!dividend) return res.status(404).send('The Dividend with the given ID was not found');
 

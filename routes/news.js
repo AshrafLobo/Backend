@@ -2,13 +2,23 @@
  * Imports
  */
 const express = require('express');
+const _ = require('lodash');
+const dateFormat = require("dateformat");
+
 const router = express();
 
 // Models
 const News = require('../models/news');
 const Issuer = require('../models/issuer');
 
-// Functions
+// Middleware
+const auth = require('../middleware/auth');
+
+/**
+ * Functions
+ */
+
+// News validator
 const { validateNews: validate } = require('../common/joiValidators');
 const { getNewsArticle } = require('../common/functions');
 
@@ -18,21 +28,29 @@ const { getNewsArticle } = require('../common/functions');
 
 // Get all news articles
 router.get('/', async (req, res) => {
+  let filter = {};
+
+  if (req.query.issuerId) {
+    filter["issuer._id"] = req.query.issuerId
+  }
+
   let articles = await News
-    .find()
+    .find(filter)
     .lean()
     .sort('-_id')
     .select();
 
-  var articles1 = [];
-  articles.forEach(async article => {
-    article.newsArticle = await getNewsArticle(article.article_src);
-    articles1.push(article);
-    //console.log(article);
-  })
+  for (const article of articles) {
+    const newsArticle = await getNewsArticle(article.article_src);
+    article.newsArticle = newsArticle;
 
-  console.log(articles1);
-  res.send(articles1);
+    const date = article._id.getTimestamp();
+    article.date = date;
+    article.dateCreated = dateFormat(date, "ddd, mmmm d, yyyy");
+    article.timeCreated = dateFormat(date, "shortTime");;
+  }
+
+  res.send(articles);
 });
 
 // Get one news article
@@ -48,7 +66,7 @@ router.get('/:newsId', async (req, res) => {
 });
 
 // Add a new news article
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -56,22 +74,16 @@ router.post('/', async (req, res) => {
   const issuer = await Issuer.findById(req.body.issuerId);
   if (!issuer) return res.status(400).send("Invalid issuer.");
 
-  const article = new News({
-    title: req.body.title,
-    issuer: {
-      _id: issuer._id,
-      name: issuer.name,
-      src_small: issuer.src_small
-    },
-    article_src: req.body.article_src
-  });
-
+  let article = _.pick(req.body, ['title', 'article_src']);
+  article.issuer = _.pick(issuer, ['_id', 'name', 'title', 'src_small']);
+  article = new News(article);
   await article.save();
+
   res.send(article);
 });
 
 // Update a news article
-router.put('/:newsId', async (req, res) => {
+router.put('/:newsId', auth, async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -79,23 +91,16 @@ router.put('/:newsId', async (req, res) => {
   const issuer = await Issuer.findById(req.body.issuerId);
   if (!issuer) return res.status(400).send("Invalid issuer.");
 
-  const article = await News.findByIdAndUpdate(req.params.newsId, {
-    title: req.body.title,
-    issuer: {
-      _id: issuer._id,
-      name: issuer.name,
-      src_small: issuer.src_small
-    },
-    article_src: req.body.article_src,
-    dateUpdated: Date.now()
-  }, { new: true });
+  let article = _.pick(req.body, ['title', 'article_src']);
+  article.issuer = _.pick(issuer, ['_id', 'name', 'title', 'src_small']);
+  article = await News.findByIdAndUpdate(req.params.newsId, article, { new: true });
   if (!article) return res.status(404).send('The news article with the given ID was not found');
 
   res.send(article);
 });
 
 // Delete a news article
-router.delete('/:newsId', async (req, res) => {
+router.delete('/:newsId', auth, async (req, res) => {
   const article = await News.findByIdAndDelete(req.params.newsId);
   if (!article) return res.status(404).send('The news article with the given ID was not found');
 

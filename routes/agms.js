@@ -2,11 +2,15 @@
  * Imports
  */
 const express = require('express');
+const _ = require('lodash');
 const router = express();
 
 // Models
 const Agm = require('../models/agm');
 const Issuer = require('../models/issuer');
+
+// Middleware
+const auth = require('../middleware/auth');
 
 // Agm validator
 const { validateAgm: validate } = require('../common/joiValidators');
@@ -17,8 +21,16 @@ const { validateAgm: validate } = require('../common/joiValidators');
 
 // Get all agms
 router.get('/', async (req, res) => {
+  let filter = {};
+
+  if (req.query.issuerId) {
+    filter["issuer"] = {
+      _id: req.query.issuerId
+    };
+  }
+
   const agms = await Agm
-    .find()
+    .find(filter)
     .populate('issuer', 'name');
 
   res.send(agms);
@@ -35,7 +47,7 @@ router.get('/:agmId', async (req, res) => {
 });
 
 // Add a new agm
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -43,20 +55,15 @@ router.post('/', async (req, res) => {
   const issuer = await Issuer.findById(req.body.issuerId);
   if (!issuer) return res.status(400).send("Invalid issuer.");
 
-  const agm = new Agm({
-    issuer: issuer._id,
-    title: req.body.title,
-    agmDate: req.body.agmDate,
-    venue: req.body.venue,
-    status: req.body.status
-  });
-
+  let agm = new Agm(_.pick(req.body, ['title', 'agmDate', 'venue', 'status']))
+  agm.issuer = issuer._id;
   await agm.save();
+
   res.send(agm);
 });
 
 // Update an agm
-router.put('/:agmId', async (req, res) => {
+router.put('/:agmId', auth, async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -64,20 +71,16 @@ router.put('/:agmId', async (req, res) => {
   const issuer = await Issuer.findById(req.body.issuerId);
   if (!issuer) return res.status(400).send("Invalid issuer.");
 
-  const agm = await Agm.findByIdAndUpdate(req.params.agmId, {
-    issuer: issuer._id,
-    title: req.body.title,
-    agmDate: req.body.agmDate,
-    venue: req.body.venue,
-    status: req.body.status
-  }, { new: true });
+  let agm = _.pick(req.body, ['title', 'agmDate', 'venue', 'status']);
+  agm.issuer = issuer._id;
+  agm = await Agm.findByIdAndUpdate(req.params.agmId, agm, { new: true });
   if (!agm) return res.status(404).send('The AGM with the given ID was not found');
 
   res.send(agm);
 });
 
 // Delete an agm
-router.delete('/:agmId', async (req, res) => {
+router.delete('/:agmId', auth, async (req, res) => {
   const agm = await Agm.findByIdAndDelete(req.params.agmId);
   if (!agm) return res.status(404).send('The AGM with the given ID was not found');
 

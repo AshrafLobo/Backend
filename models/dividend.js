@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Float = require('mongoose-float').loadType(mongoose);
 
 // Dividend model
 const Dividend = mongoose.model('Dividend', mongoose.Schema({
@@ -20,7 +21,7 @@ const Dividend = mongoose.model('Dividend', mongoose.Schema({
     default: 'TBD'
   },
   dividendRate: {
-    type: Boolean,
+    type: Float,
   },
   status: {
     type: String,

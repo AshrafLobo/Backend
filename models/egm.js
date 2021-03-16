@@ -13,7 +13,7 @@ const Egm = mongoose.model('Egm', mongoose.Schema({
     minLength: 5,
     maxLength: 255
   },
-  agmDate: {
+  egmDate: {
     type: Date
   },
   venue: {
