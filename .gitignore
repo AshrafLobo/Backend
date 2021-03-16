@@ -1,5 +1,3 @@
 node_modules/
 dump/
 .env
-logfile.log
-uncaughtExceptions.log
