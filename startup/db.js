@@ -1,10 +1,11 @@
 // Npm Imports
 const mongoose = require('mongoose');
 const winston = require('winston');
+const config = require('config');
 
 module.exports = function () {
   /** Connect to MongoDB */
-  mongoose.connect('mongodb://localhost/comprite', {
+  mongoose.connect(config.get('database.configurationString'), {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
