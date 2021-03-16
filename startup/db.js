@@ -5,7 +5,7 @@ const config = require('config');
 
 module.exports = function () {
   /** Connect to MongoDB */
-  mongoose.connect(config.get('database.configurationString'), {
+  mongoose.connect(config.get('database'), {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
