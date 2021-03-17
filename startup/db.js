@@ -1,11 +1,10 @@
 // Npm Imports
 const mongoose = require('mongoose');
 const winston = require('winston');
-const config = require('config');
 
 module.exports = function () {
   /** Connect to MongoDB */
-  mongoose.connect(config.get('database'), {
+  mongoose.connect(process.env.MONGODB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
