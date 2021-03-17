@@ -18,4 +18,4 @@ require('./startup/prod')(app);
 
 /** Start server */
 const port = process.env.PORT || 3000;
-Promise.resolve(app.listen(port)).then(() => winston.info(`Listening on port ${port}...`));
+app.listen(port, () => () => winston.info(`Listening on port ${port}...`));
