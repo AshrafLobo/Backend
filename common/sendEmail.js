@@ -8,6 +8,7 @@ module.exports = async function (output, subject) {
   let transporter = nodemailer.createTransport({
     host: "smtpout.secureserver.net",
     port: 25,
+    secure: false,
     auth: {
       user: config.get('user.user'),
       pass: config.get('user.pass')
@@ -17,7 +18,7 @@ module.exports = async function (output, subject) {
   // send mail with defined transport object
   try {
     let info = await transporter.sendMail({
-      from: '"Comprite Email Test - Ashraf" <aloboashi@gmail.com>', // sender address
+      from: `"Comprite Email Test" <${config.get('user.user')}>`, // sender address
       to: "ashraflobo@gmail.com", // list of receivers
       subject: subject, // Subject line
       text: "Hello world?", // plain text body

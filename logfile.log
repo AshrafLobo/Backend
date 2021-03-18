@@ -1,0 +1,55 @@
+2021-03-18T07:55:48.766Z info: Listening on port 3000...
+2021-03-18T07:55:53.144Z info: Connected to MongoDB...
+2021-03-18T07:58:42.574Z error: unhandledRejection: Invalid login: 535 Authentication Failed for info@comp-rite.comp
+Error: Invalid login: 535 Authentication Failed for info@comp-rite.comp
+    at SMTPConnection._formatError (C:\Users\HP\Desktop\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:19)
+    at SMTPConnection._actionAUTHComplete (C:\Users\HP\Desktop\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1513:34)
+    at SMTPConnection.<anonymous> (C:\Users\HP\Desktop\backend\node_modules\nodemailer\lib\smtp-connection\index.js:540:26)
+    at SMTPConnection._processResponse (C:\Users\HP\Desktop\backend\node_modules\nodemailer\lib\smtp-connection\index.js:932:20)
+    at SMTPConnection._onData (C:\Users\HP\Desktop\backend\node_modules\nodemailer\lib\smtp-connection\index.js:739:14)
+    at TLSSocket.SMTPConnection._onSocketData (C:\Users\HP\Desktop\backend\node_modules\nodemailer\lib\smtp-connection\index.js:189:44)
+    at TLSSocket.emit (events.js:315:20)
+    at addChunk (internal/streams/readable.js:309:12)
+    at readableAddChunk (internal/streams/readable.js:284:9)
+    at TLSSocket.Readable.push (internal/streams/readable.js:223:10)
+    at TLSWrap.onStreamRead (internal/stream_base_commons.js:188:23)
+2021-03-18T08:03:27.179Z info: Listening on port 3000...
+2021-03-18T08:03:30.609Z info: Connected to MongoDB...
+2021-03-18T08:04:26.260Z error: unhandledRejection: Invalid login: 535 Authentication Failed for info@comp-rite.comp
+Error: Invalid login: 535 Authentication Failed for info@comp-rite.comp
+    at SMTPConnection._formatError (C:\Users\HP\Desktop\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:19)
+    at SMTPConnection._actionAUTHComplete (C:\Users\HP\Desktop\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1513:34)
+    at SMTPConnection.<anonymous> (C:\Users\HP\Desktop\backend\node_modules\nodemailer\lib\smtp-connection\index.js:540:26)
+    at SMTPConnection._processResponse (C:\Users\HP\Desktop\backend\node_modules\nodemailer\lib\smtp-connection\index.js:932:20)
+    at SMTPConnection._onData (C:\Users\HP\Desktop\backend\node_modules\nodemailer\lib\smtp-connection\index.js:739:14)
+    at TLSSocket.SMTPConnection._onSocketData (C:\Users\HP\Desktop\backend\node_modules\nodemailer\lib\smtp-connection\index.js:189:44)
+    at TLSSocket.emit (events.js:315:20)
+    at addChunk (internal/streams/readable.js:309:12)
+    at readableAddChunk (internal/streams/readable.js:284:9)
+    at TLSSocket.Readable.push (internal/streams/readable.js:223:10)
+    at TLSWrap.onStreamRead (internal/stream_base_commons.js:188:23)
+2021-03-18T08:17:58.050Z info: Listening on port 3000...
+2021-03-18T08:18:06.366Z info: Connected to MongoDB...
+2021-03-18T08:18:22.555Z info: Message sent: <9de378f4-2ed8-1846-839f-67b80ba00cda@gmail.com>
+2021-03-18T08:18:22.557Z info: Preview URL: false
+2021-03-18T08:21:25.770Z info: Listening on port 3000...
+2021-03-18T08:21:28.338Z info: Connected to MongoDB...
+2021-03-18T08:25:43.502Z info: Listening on port 3000...
+2021-03-18T08:25:46.443Z info: Connected to MongoDB...
+2021-03-18T08:26:22.688Z error: unhandledRejection: Message failed: 550 <> Sender Rejected - MAILFROM must be a valid domain. Ensure the mailfrom domain: ""  has a valid MX or A record.
+Error: Message failed: 550 <> Sender Rejected - MAILFROM must be a valid domain. Ensure the mailfrom domain: ""  has a valid MX or A record.
+    at SMTPConnection._formatError (C:\Users\HP\Desktop\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:19)
+    at SMTPConnection._actionSMTPStream (C:\Users\HP\Desktop\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1651:34)
+    at SMTPConnection.<anonymous> (C:\Users\HP\Desktop\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1136:22)
+    at SMTPConnection._processResponse (C:\Users\HP\Desktop\backend\node_modules\nodemailer\lib\smtp-connection\index.js:932:20)
+    at SMTPConnection._onData (C:\Users\HP\Desktop\backend\node_modules\nodemailer\lib\smtp-connection\index.js:739:14)
+    at TLSSocket.SMTPConnection._onSocketData (C:\Users\HP\Desktop\backend\node_modules\nodemailer\lib\smtp-connection\index.js:189:44)
+    at TLSSocket.emit (events.js:315:20)
+    at addChunk (internal/streams/readable.js:309:12)
+    at readableAddChunk (internal/streams/readable.js:284:9)
+    at TLSSocket.Readable.push (internal/streams/readable.js:223:10)
+    at TLSWrap.onStreamRead (internal/stream_base_commons.js:188:23)
+2021-03-18T08:27:12.154Z info: Listening on port 3000...
+2021-03-18T08:27:16.656Z info: Connected to MongoDB...
+2021-03-18T08:27:29.295Z info: Message sent: <df4d52ba-3c62-4c36-c2d6-2a71c870fbb6@comp-rite.com>
+2021-03-18T08:27:29.297Z info: Preview URL: false
