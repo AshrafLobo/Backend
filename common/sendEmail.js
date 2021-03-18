@@ -1,14 +1,16 @@
 const winston = require('winston');
+const config = require('config');
 const nodemailer = require('nodemailer');
 
 module.exports = async function (output, subject) {
 
   // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: "smtpout.secureserver.net",
+    port: 25,
     auth: {
-      user: 'aloboashi@gmail.com',
-      pass: '88ElCG*jE6Hs'
+      user: config.get('user.user'),
+      pass: config.get('user.pass')
     }
   });
 
