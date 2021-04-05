@@ -25,6 +25,12 @@ router.get('/me', auth, async (req, res) => {
   res.send(user);
 });
 
+// Get all users
+router.get('/', auth, async (req,res) => {
+	const users = await User.find();
+	res.send(users);
+});
+
 // Add a new user
 router.post('/', async (req, res) => {
   const { error } = validate(req.body);
