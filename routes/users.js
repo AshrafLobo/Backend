@@ -11,6 +11,7 @@ const User = require('../models/user');
 
 // Middleware
 const auth = require('../middleware/auth');
+const admin = require('../middleware/admin');
 
 // User validator
 const { validateUser: validate } = require('../common/joiValidators');
@@ -50,11 +51,10 @@ router.post('/', async (req, res) => {
 });
 
 // Delete a user
-//router.delete('/:userId', [auth, admin], async (req, res) => {
-  //const user = await User.findByIdAndDelete(req.params.userId);
-  //if (!user) return res.status(404).send('The user with the given ID was not found');
-
-  //res.send(user);
-//});
+router.delete('/:userId', [auth, admin], async (req, res) => {
+  const user = await User.findByIdAndDelete(req.params.userId);
+  if (!user) return res.status(404).send('The user with the given ID was not found');
+  res.send(user);
+});
 
 module.exports = router;
