@@ -50,11 +50,11 @@ router.post('/', async (req, res) => {
 });
 
 // Delete a user
-router.delete('/:userId', [auth, admin], async (req, res) => {
-  const user = await User.findByIdAndDelete(req.params.userId);
-  if (!user) return res.status(404).send('The user with the given ID was not found');
+//router.delete('/:userId', [auth, admin], async (req, res) => {
+  //const user = await User.findByIdAndDelete(req.params.userId);
+  //if (!user) return res.status(404).send('The user with the given ID was not found');
 
-  res.send(user);
-});
+  //res.send(user);
+//});
 
 module.exports = router;
