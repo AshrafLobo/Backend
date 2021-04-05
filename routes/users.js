@@ -27,7 +27,7 @@ router.get('/me', auth, async (req, res) => {
 
 // Get all users
 router.get('/', auth, async (req,res) => {
-	const users = await User.find();
+	const users = await User.find().select('-password');
 	res.send(users);
 });
 
