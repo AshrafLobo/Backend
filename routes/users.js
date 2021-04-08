@@ -33,7 +33,7 @@ router.get('/', auth, async (req,res) => {
 });
 
 // Add a new user
-router.post('/', [auth, admin] async (req, res) => {
+router.post('/', admin, async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -59,7 +59,7 @@ router.post('/', [auth, admin] async (req, res) => {
 //});
 
 // Delete a user
-router.delete('/:userId', [auth, admin], async (req, res) => {
+router.delete('/:userId',admin, async (req, res) => {
   const user = await User.findByIdAndDelete(req.params.userId);
   if (!user) return res.status(404).send('The user with the given ID was not found');
   res.send(user);
