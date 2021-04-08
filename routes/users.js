@@ -51,12 +51,12 @@ router.post('/', [auth, admin], async (req, res) => {
 });
 
 // Update a user
-//router.put('/:userId', [auth, admin], async (req, res) => {
-  //const user = await User.findByIdAndUpdate(req.params.userId, _.pick(req.body, ['name', 'email']), { new: true });
-  //if (!user) return res.status(404).send('The user with the given ID was not found');
+router.put('/:userId', [auth, admin], async (req, res) => {
+  const user = await User.findByIdAndUpdate(req.params.userId, _.pick(req.body, ['name', 'email']), { new: true });
+  if (!user) return res.status(404).send('The user with the given ID was not found');
 
-  //res.send(user);
-//});
+  res.send(user);
+});
 
 // Delete a user
 router.delete('/:userId', [auth,admin], async (req, res) => {
