@@ -1,0 +1,34 @@
+Understanding Fringe Benefit Tax
+BLOG 23/12/2020
+
+Loan facilities come in handy with the need for that extra cash. Some employers offer loans to their employees at interest rates lower than market rate. This is an employment benefit to the employee(s) which is subject to a tax known as Fringe Benefit Tax (FBT).
+
+Fringe benefit tax is payable by every employer in respect of a loan provided to an employee, director or their relatives at an interest rate lower than the market rate.
+
+The taxable value of fringe benefit tax is the difference between the market interest rate and the actual interest paid on the loan. Where the term of the loan extends beyond the date of termination of employment, it applies as long as the loan remains unpaid. Fringe benefit tax is charged on the taxable value of a fringe benefit provided by employer in a month and is due and payable on or before 9th of the following month. The prescribed rate of interest is based on the market lending rates as the Commissioner may prescribe every quarter of the year.
+
+Example;
+
+Ken gets a loan of Kshs. 3,000,000
+
+Loan amount:  Kshs.3, 000,000
+
+Interest charged: 3%
+
+Market Interest rate for the month: 9%
+
+Fringe Benefit is (9% - 3% = 6%) = Kshs.3, 000,000 x 6% =180,000 p.a   
+
+i.e.   Kshs. 15,000   per   month.
+
+Fringe   Benefit   tax   payable   by   employer   is   Kshs.   15,000   x   30%
+
+  =  Kshs. 4,500/-  for the month
+
+ 
+
+Fringe benefit tax is provided under section 12B of the Income Tax Act, which became effective from 12th June, 1998 in respect of loan provided to an employee, director or their relatives at an interest rate lower than the market interest rate.
+
+The taxable value of fringe benefit is determined as follows; In case of loans provided after 11th June, 1998 or loan provided on or before 11th June, 1998 whose terms and conditions have changed after 11th June, 1998, the value of Fringe Benefit shall be the difference between the interest that would have been payable on the loan if calculated at the market interest rate and the actual interest paid.
+
+Fringe benefit tax is paid by employers with PAYE obligation. Failure to remit attracts a penalty of 25% of the tax due and late payment attracts a penalty of 5% of tax due.

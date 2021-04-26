@@ -1,0 +1,30 @@
+Demystifying Digital Services Tax
+BLOG 27/01/2021
+
+The Digital Services Tax (DST) was introduced through The Finance Act 2020. It is a tax that is payable on income derived or accrued in Kenya from services offered through a digital marketplace. A digital marketplace is a platform that enables direct interaction between buyers and sellers of goods and services through electronic means. DST is payable at the rate of 1.5% of the gross transaction value.
+
+The effective date of DST is 1st January 2020. The tax is payable by both residents and non-residents who are either digital service providers or digital market place providers.
+
+Some of the digital services include: downloadable digital content including downloadable mobile applications, e-books and films; over-the-top services including streaming television shows, films, music, podcasts and any form of digital content; sale of, licensing of, or any other form of monetising data collected about Kenyan users which has been generated from the users’ activities on a digital marketplace: provision of a digital marketplace; subscription-based media including news, magazines and journals etc.
+
+DST return and payment is due on or before the 20th day following the end of the month the digital service was offered. How does one determine whether the digital services have been provided in Kenya? A digital service provider shall be subject to digital service tax if they provide or facilitate provision of a service to a user who is located in Kenya. 
+
+Does DST apply to those selling goods via digital or social media platforms? No, DST is applicable to digital services, therefore, for goods sold on digital or social media platforms the suppliers are required to declare the income earned under the self-assessment regime provided under the relevant Tax Laws. For example;
+
+Maria sells clothes online on Instagram, is she liable to pay DST? No, Maria will not pay DST, she will be required to declare her income and pay income tax as provided for in the Income Tax Act. Instagram, however, will be liable to pay DST at the rate of 1.5% every month.
+
+However, if Maria is an influencer who charges clients to advertise their products on her Instagram page, then she will be liable to pay DST. In this scenario, both Instagram and Maria will pay DST.
+
+If Maria owns a website where individuals and companies advertise their products, then she will also pay DST. DST will be applicable on the commission of fee charged for the use of the platforms enabling direct interaction between buyers and sellers through a digital marketplace, website, or other online applications.
+
+DST is not a final tax for residents and companies with a permanent establishment in Kenya. DST will be an advance tax that they will offset against the income taxes due at the end of the financial year. For non-residents and companies without a permanent establishment in Kenya, DST will be a final tax.
+
+Application for registration by non-resident digital service providers without permanent establishment shall be done through an online registration form via the iTax portal; https://itax.kra.go.ke/KRA-Portal/. Resident digital service providers will not be required to file a return, instead, they will generate a payment slip on iTax on or before the 20th of February 2021.Collection of DST will ensure a level playing field for Kenyan digital service providers, expand the tax base and increase tax collection.
+
+For more information on DST, click on the link below;
+
+https://www.kra.go.ke/images/publications/Brochure-Digital-Service-Tax-Website.pdf
+
+ 
+
+By Rhoda Wambui
