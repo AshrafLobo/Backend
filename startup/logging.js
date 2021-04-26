@@ -15,7 +15,7 @@ module.exports = function (app) {
     )
   }
 
-  // winston Format
+  // winston Format 2
   const winstonFormat2 = {
     file: winston.format.combine(
       winston.format.timestamp(),
