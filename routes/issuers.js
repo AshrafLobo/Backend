@@ -62,8 +62,8 @@ router.post('/', [logoUpload, auth], async (req, res) => {
     [src] = src;
     [src_small] = src_small;
 
-    data['src'] = src.path;
-    data['src_small'] = src_small.path;
+    data['src'] = `${req.protocol}://${req.headers.host}/${src.path.replace("\\", "\/")}`;
+    data['src_small'] = `${req.protocol}://${req.headers.host}/${src_small.path.replace("\\", "\/")}`;
   }
 
   const issuer = new Issuer(data)
@@ -85,8 +85,8 @@ router.put('/:companyId', [logoUpload, auth], async (req, res) => {
     [src] = src;
     [src_small] = src_small;
 
-    data['src'] = src.path;
-    data['src_small'] = src_small.path;
+    data['src'] = `${req.protocol}://${req.headers.host}/${src.path.replace("\\", "\/")}`;
+    data['src_small'] = `${req.protocol}://${req.headers.host}/${src_small.path.replace("\\", "\/")}`;
   }
 
   const issuer = await Issuer.findByIdAndUpdate(req.params.companyId, data, { new: true });
