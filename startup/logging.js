@@ -15,8 +15,21 @@ module.exports = function (app) {
     )
   }
 
+  // winston Format
+  const winstonFormat2 = {
+    file: winston.format.combine(
+      winston.format.timestamp(),
+      winston.format.printf(error => `${error.timestamp} ${error.level}: ${error.message}`)
+    )
+  }
+
   /** Handle Uncaught Promise and Synchronous Exceptions */
-  winston.exceptions.handle(new winston.transports.File({ filename: 'uncaughtExceptions.log' }));
+  winston.exceptions.handle(new winston.transports.File({
+    filename: 'uncaughtExceptions.log',
+    format: winstonFormat2.file,
+    handleExceptions: true,
+    handleRejections: true
+  }));
 
   // Create winston transport
   winston.add(new winston.transports.File({
