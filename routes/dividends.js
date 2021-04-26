@@ -59,7 +59,12 @@ router.post('/', auth, async (req, res) => {
   dividend.issuer = issuer._id;
   await dividend.save();
 
-  res.send(dividend);
+  let returnData = {...dividend["_doc"]};
+  returnData.issuer = {
+	_id: issuer._id,
+	name: issuer.name
+  };
+  res.send(returnData);
 });
 
 // Update dividend
@@ -71,12 +76,17 @@ router.put('/:dividendId', auth, async (req, res) => {
   const issuer = await Issuer.findById(req.body.issuerId);
   if (!issuer) return res.status(400).send("Invalid issuer.");
 
-  let dividend = _.pick(req.body, ['title', 'agmDate', 'venue', 'status']);
+  let dividend = _.pick(req.body, ['bookClosureDate', 'disbursmentDate', 'dividendType', 'dividendRate', 'status']);
   dividend.issuer = issuer._id;
   dividend = await Dividend.findByIdAndUpdate(req.params.dividendId, dividend, { new: true });
   if (!dividend) return res.status(404).send('The Dividend with the given ID was not found');
 
-  res.send(dividend);
+  let returnData = {...dividend["_doc"]};
+  returnData.issuer = {
+	_id: issuer._id,
+	name: issuer.name
+  };
+  res.send(returnData);
 });
 
 // Delete dividend

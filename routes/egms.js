@@ -59,7 +59,12 @@ router.post('/', auth, async (req, res) => {
   egm.issuer = issuer._id;
   await egm.save();
 
-  res.send(egm);
+  let returnData = {...egm["_doc"]};
+  returnData.issuer = {
+	_id: issuer._id,
+	name: issuer.name
+  };
+  res.send(returnData);
 });
 
 // Update an egm
@@ -76,7 +81,12 @@ router.put('/:egmId', auth, async (req, res) => {
   egm = await Egm.findByIdAndUpdate(req.params.egmId, egm, { new: true });
   if (!egm) return res.status(404).send('The EGM with the given ID was not found');
 
-  res.send(egm);
+  let returnData = {...egm["_doc"]};
+  returnData.issuer = {
+	_id: issuer._id,
+	name: issuer.name
+  };
+  res.send(returnData);
 });
 
 // Delete an egm

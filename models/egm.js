@@ -17,7 +17,8 @@ const Egm = mongoose.model('Egm', mongoose.Schema({
     type: Date
   },
   venue: {
-    type: String
+    type: String,
+	default: 'TBD'
   },
   status: {
     type: String,

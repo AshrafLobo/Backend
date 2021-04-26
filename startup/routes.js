@@ -25,6 +25,7 @@ module.exports = function (app) {
   /** Middleware - Before Route Call */
   app.use(express.json());
   app.use(cors());
+  app.use('/uploads', express.static('uploads'))
 
   /** API Routes Mapping */
   app.use('/api/issuers', issuers);

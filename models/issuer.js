@@ -20,15 +20,11 @@ const Issuer = mongoose.model('Issuer', mongoose.Schema({
   },
   src: {
     type: String,
-    required: true,
-    minLength: 5,
-    maxLength: 50
+    required: true
   },
   src_small: {
     type: String,
     required: true,
-    minLength: 5,
-    maxLength: 255
   },
   url_link: {
     type: String,

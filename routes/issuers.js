@@ -2,6 +2,8 @@
  * Imports
  */
 const express = require('express');
+const fs = require('fs');
+const multer = require('multer');
 const _ = require('lodash');
 const router = express();
 
@@ -14,6 +16,20 @@ const admin = require('../middleware/admin');
 
 // Issuer validator
 const { validateIssuer: validate } = require('../common/joiValidators');
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    fs.mkdir('./uploads/', (err) => {
+      cb(null, 'uploads');
+    });
+  },
+  filename: function (req, file, cb) {
+    cb(null, new Date().toISOString().replace(/:/g, '-') + file.originalname);
+  }
+});
+
+const upload = multer({ storage: storage });
+const logoUpload = upload.fields([{ name: 'src' }, { name: 'src_small' }]);
 
 /**
  * API Routes
@@ -34,22 +50,46 @@ router.get('/:companyId', async (req, res) => {
 });
 
 // Add a new issuer
-router.post('/', auth, async (req, res) => {
+router.post('/', [logoUpload, auth], async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  const issuer = new Issuer(_.pick(req.body, ['name', 'title', 'description', 'src', 'src_small', 'url_link']))
+  let data = _.pick(req.body, ['name', 'title', 'description']);
+  data['url_link'] = data.name.toLowerCase().replace(' ', "_");
+
+  if (req.files) {
+    let { src, src_small } = req.files;
+    [src] = src;
+    [src_small] = src_small;
+
+    data['src'] = src.path;
+    data['src_small'] = src_small.path;
+  }
+
+  const issuer = new Issuer(data)
   await issuer.save();
 
   res.send(issuer);
 });
 
 // Update an issuer
-router.put('/:companyId', auth, async (req, res) => {
+router.put('/:companyId', [logoUpload, auth], async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  const issuer = await Issuer.findByIdAndUpdate(req.params.companyId, _.pick(req.body, ['name', 'title', 'description', 'src', 'src_small', 'url_link']), { new: true });
+  let data = _.pick(req.body, ['name', 'title', 'description']);
+  data['url_link'] = data.name.toLowerCase().replace(' ', "_");
+
+  if (req.files) {
+    let { src, src_small } = req.files;
+    [src] = src;
+    [src_small] = src_small;
+
+    data['src'] = src.path;
+    data['src_small'] = src_small.path;
+  }
+
+  const issuer = await Issuer.findByIdAndUpdate(req.params.companyId, data, { new: true });
   if (!issuer) return res.status(404).send('The issuer with the given ID was not found');
 
   res.send(issuer);

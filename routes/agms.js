@@ -59,7 +59,12 @@ router.post('/', auth, async (req, res) => {
   agm.issuer = issuer._id;
   await agm.save();
 
-  res.send(agm);
+  let returnData = {...agm["_doc"]};
+  returnData.issuer = {
+	_id: issuer._id,
+	name: issuer.name
+  };
+  res.send(returnData);
 });
 
 // Update an agm
@@ -76,7 +81,12 @@ router.put('/:agmId', auth, async (req, res) => {
   agm = await Agm.findByIdAndUpdate(req.params.agmId, agm, { new: true });
   if (!agm) return res.status(404).send('The AGM with the given ID was not found');
 
-  res.send(agm);
+  let returnData = {...agm["_doc"]};
+  returnData.issuer = {
+	_id: issuer._id,
+	name: issuer.name
+  };
+  res.send(returnData);
 });
 
 // Delete an agm

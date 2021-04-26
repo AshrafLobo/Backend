@@ -27,9 +27,9 @@ router.get('/me', auth, async (req, res) => {
 });
 
 // Get all users
-router.get('/', auth, async (req,res) => {
-	const users = await User.find().select('-password');
-	res.send(users);
+router.get('/', auth, async (req, res) => {
+  const users = await User.find().select('-password');
+  res.send(users);
 });
 
 // Add a new user
@@ -59,7 +59,7 @@ router.put('/:userId', [auth, admin], async (req, res) => {
 });
 
 // Delete a user
-router.delete('/:userId', [auth,admin], async (req, res) => {
+router.delete('/:userId', [auth, admin], async (req, res) => {
   const user = await User.findByIdAndDelete(req.params.userId);
   if (!user) return res.status(404).send('The user with the given ID was not found');
   res.send(user);

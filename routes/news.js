@@ -2,6 +2,8 @@
  * Imports
  */
 const express = require('express');
+const fs = require('fs');
+const multer = require('multer');
 const _ = require('lodash');
 const dateFormat = require("dateformat");
 
@@ -22,6 +24,18 @@ const auth = require('../middleware/auth');
 const { validateNews: validate } = require('../common/joiValidators');
 const { getNewsArticle } = require('../common/functions');
 
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    fs.mkdir('./articles', (err) => {
+      cb(null, 'articles')
+    });
+  },
+  filename: function (req, file, cb) {
+    cb(null, new Date().toISOString().replace(/:/g, '-') + file.originalname)
+  }
+});
+
+const upload = multer({ storage: storage });
 /**
  * API Routes
  */
@@ -66,7 +80,7 @@ router.get('/:newsId', async (req, res) => {
 });
 
 // Add a new news article
-router.post('/', auth, async (req, res) => {
+router.post('/', [upload.single('article_src'), auth], async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -74,7 +88,8 @@ router.post('/', auth, async (req, res) => {
   const issuer = await Issuer.findById(req.body.issuerId);
   if (!issuer) return res.status(400).send("Invalid issuer.");
 
-  let article = _.pick(req.body, ['title', 'article_src']);
+  let article = _.pick(req.body, ['title']);
+  article['article_src'] = req.file.path;
   article.issuer = _.pick(issuer, ['_id', 'name', 'title', 'src_small']);
   article = new News(article);
   await article.save();
@@ -83,7 +98,7 @@ router.post('/', auth, async (req, res) => {
 });
 
 // Update a news article
-router.put('/:newsId', auth, async (req, res) => {
+router.put('/:newsId', [upload.single('article_src'), auth], async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -91,7 +106,8 @@ router.put('/:newsId', auth, async (req, res) => {
   const issuer = await Issuer.findById(req.body.issuerId);
   if (!issuer) return res.status(400).send("Invalid issuer.");
 
-  let article = _.pick(req.body, ['title', 'article_src']);
+  let article = _.pick(req.body, ['title']);
+  article['article_src'] = req.file.path;
   article.issuer = _.pick(issuer, ['_id', 'name', 'title', 'src_small']);
   article = await News.findByIdAndUpdate(req.params.newsId, article, { new: true });
   if (!article) return res.status(404).send('The news article with the given ID was not found');

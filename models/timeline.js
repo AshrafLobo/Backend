@@ -20,6 +20,10 @@ const Timeline = mongoose.model('Timeline', mongoose.Schema({
     type: Date,
     required: true,
     max: Date.now
+  },
+  dateUpdated: {
+    type: Date,
+    default: Date.now
   }
 }));
 

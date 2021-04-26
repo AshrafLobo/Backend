@@ -21,8 +21,8 @@ const { validateTimeline: validate } = require('../common/joiValidators');
 
 // Get all timelines
 router.get('/', async (req, res) => {
-  const issuers = await Timeline.find().sort('name');
-  res.send(issuers);
+  const timeline = await Timeline.find().sort('timelineDate');
+  res.send(timeline);
 });
 
 // Get one timeline
@@ -45,7 +45,7 @@ router.post('/', auth, async (req, res) => {
 });
 
 // Update a timeline
-router.put('/:testimonialId', auth, async (req, res) => {
+router.put('/:timelineId', auth, async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -56,11 +56,11 @@ router.put('/:testimonialId', auth, async (req, res) => {
 });
 
 // Delete a timeline
-router.delete('/:testimonialId', auth, async (req, res) => {
-  const testimonial = await Timeline.findByIdAndDelete(req.params.testimonialId);
-  if (!testimonial) return res.status(404).send('The testimonial with the given ID was not found');
+router.delete('/:timelineId', auth, async (req, res) => {
+  const timeline = await Timeline.findByIdAndDelete(req.params.timelineId);
+  if (!timeline) return res.status(404).send('The timeline with the given ID was not found');
 
-  res.send(testimonial);
+  res.send(timeline);
 });
 
 module.exports = router;

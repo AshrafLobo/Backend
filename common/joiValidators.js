@@ -12,9 +12,6 @@ function validateIssuer(issuer) {
     name: Joi.string().min(5).max(255).required(),
     title: Joi.string().min(5).max(255).required(),
     description: Joi.string().required(),
-    src: Joi.string().min(5).max(50).required(),
-    src_small: Joi.string().min(5).max(50).required(),
-    url_link: Joi.string().min(5).max(50).required(),
   });
 
   return schema.validate(issuer);
@@ -48,7 +45,7 @@ function validateAgm(agm) {
     issuerId: Joi.objectId().required(),
     title: Joi.string().min(5).max(255).required(),
     agmDate: Joi.date(),
-    venue: Joi.string().min(5).max(255),
+    venue: Joi.string(),
     status: Joi.string().valid('pending', 'completed')
   });
 
@@ -61,7 +58,7 @@ function validateEgm(egm) {
     issuerId: Joi.objectId().required(),
     title: Joi.string().min(5).max(255).required(),
     egmDate: Joi.date(),
-    venue: Joi.string().min(5).max(255),
+    venue: Joi.string(),
     status: Joi.string().valid('pending', 'completed')
   });
 
