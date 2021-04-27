@@ -19,7 +19,8 @@ const PayrollDownloadForm = mongoose.model('PayrollDownloadForm', mongoose.Schem
     required: true,
   },
   phoneNumber: {
-    type: String
+    type: String,
+    required: true
   },
   company: {
     type: String,
