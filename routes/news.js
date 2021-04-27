@@ -80,7 +80,8 @@ router.get('/:newsId', async (req, res) => {
 });
 
 // Add a new news article
-router.post('/', [upload.single('article_src'), auth], async (req, res) => {
+// router.post('/', [upload.single('article_src'), auth], async (req, res) => {
+router.post('/', auth, async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -88,8 +89,9 @@ router.post('/', [upload.single('article_src'), auth], async (req, res) => {
   const issuer = await Issuer.findById(req.body.issuerId);
   if (!issuer) return res.status(400).send("Invalid issuer.");
 
-  let article = _.pick(req.body, ['title']);
-  article['article_src'] = req.file.path;
+  // let article = _.pick(req.body, ['title']);
+  // article['article_src'] = req.file.path;
+  let article = _.pick(req.body, ['title', 'article_src']);
   article.issuer = _.pick(issuer, ['_id', 'name', 'title', 'src_small']);
   article = new News(article);
   await article.save();
