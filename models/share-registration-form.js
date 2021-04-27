@@ -32,7 +32,6 @@ const ShareRegistrationForm = mongoose.model('ShareRegistrationForm', mongoose.S
   },
   cdscNumber: {
     type: String,
-    required: true,
     minlength: 5
   },
   company: {
