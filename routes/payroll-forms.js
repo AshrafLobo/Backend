@@ -28,8 +28,8 @@ router.post('/', async (req, res) => {
   <h3>User Details</h3>
   <ol>
     <li>Name: ${firstName} ${lastName}</li>    
-    <li>Email: ${email}</li>    
-    <li>Phone number: ${phoneNumber}</li>    
+    <li>Email: ${email || 'N/A'}</li>    
+    <li>Phone number: ${phoneNumber || 'N/A'}</li>    
   </ol> 
   
   <h3>Company Details</h3>

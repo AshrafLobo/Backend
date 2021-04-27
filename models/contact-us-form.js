@@ -16,7 +16,6 @@ const ContactUsForm = mongoose.model('ContactUsForm', mongoose.Schema({
   },
   email: {
     type: String,
-    required: true,
   },
   phoneNumber: {
     type: String

@@ -97,8 +97,8 @@ function validatePayrollForm(formData) {
   const schema = Joi.object({
     firstName: Joi.string().max(50).required(),
     lastName: Joi.string().max(50).required(),
-    email: Joi.string().email().required(),
-    phoneNumber: Joi.string().pattern(new RegExp('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$')).required(),
+    email: Joi.string().email(),
+    phoneNumber: Joi.string().pattern(new RegExp('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$')),
     company: Joi.string().required(),
     jobTitle: Joi.string(),
     numberOfEmployees: Joi.number().min(0),
@@ -114,8 +114,8 @@ function validateDownloadPayrollForm(formData) {
   const schema = Joi.object({
     firstName: Joi.string().max(50).required(),
     lastName: Joi.string().max(50).required(),
-    email: Joi.string().email().required(),
-    phoneNumber: Joi.string().pattern(new RegExp('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$')).required(),
+    email: Joi.string().email(),
+    phoneNumber: Joi.string().pattern(new RegExp('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$')),
     company: Joi.string().required(),
     numberOfEmployees: Joi.number().min(0),
   });
@@ -128,8 +128,8 @@ function validateContactUsForm(formData) {
   const schema = Joi.object({
     firstName: Joi.string().max(50).required(),
     lastName: Joi.string().max(50).required(),
-    email: Joi.string().email().required(),
-    phoneNumber: Joi.string().pattern(new RegExp('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$')).required(),
+    email: Joi.string().email(),
+    phoneNumber: Joi.string().pattern(new RegExp('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$')),
     subject: Joi.string().required(),
     message: Joi.string().min(5).max(1024).required()
   });
@@ -142,8 +142,8 @@ function validateShareRegistrationForm(formData) {
   const schema = Joi.object({
     firstName: Joi.string().max(50).required(),
     lastName: Joi.string().max(50).required(),
-    email: Joi.string().email().required(),
-    phoneNumber: Joi.string().pattern(new RegExp('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$')).required(),
+    email: Joi.string().email(),
+    phoneNumber: Joi.string().pattern(new RegExp('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$')),
     address: Joi.string(),
     idNumber: Joi.string().required().min(5),
     cdscNumber: Joi.string().min(5),

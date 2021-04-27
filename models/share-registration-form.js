@@ -16,11 +16,9 @@ const ShareRegistrationForm = mongoose.model('ShareRegistrationForm', mongoose.S
   },
   email: {
     type: String,
-    required: true,
   },
   phoneNumber: {
     type: String,
-    required: true
   },
   address: {
     type: String
