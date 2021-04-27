@@ -22,7 +22,7 @@ const sendEmail = require('../common/sendEmail');
 
 // Add a new payroll form
 router.post('/', async (req, res) => {
-  const { firstName, lastName, email, phoneNumber, subject, message } = req.body;
+  const { firstName, lastName, email, phoneNumber, company, message } = req.body;
   const output = `
   <p>PAYROLL DOWNLOAD FORM REQUEST</p>
   <h3>User Details</h3>
