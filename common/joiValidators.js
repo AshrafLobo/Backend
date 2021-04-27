@@ -102,7 +102,7 @@ function validatePayrollForm(formData) {
     company: Joi.string().required(),
     jobTitle: Joi.string(),
     numberOfEmployees: Joi.number().min(0),
-    enquireAbout: Joi.string().required().valid('pay 100', 'payroll submission', 'payroll outsourcing services', 'online FTP backup', 'other'),
+    enquireAbout: Joi.string().required(),
     message: Joi.string().min(5).max(1024).required()
   });
 

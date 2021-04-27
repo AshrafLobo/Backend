@@ -19,16 +19,17 @@ const PayrollForm = mongoose.model('PayrollForm', mongoose.Schema({
     required: true,
   },
   phoneNumber: {
-    type: String
+    type: String,
+    required: true
   },
   company: {
-	type: String,
-	trim: true,
-	required: true
+    type: String,
+    trim: true,
+    required: true
   },
   jobTitle: {
     type: String,
-	trim: true
+    trim: true
   },
   numberOfEmployees: {
     type: Number,
@@ -36,7 +37,6 @@ const PayrollForm = mongoose.model('PayrollForm', mongoose.Schema({
   },
   enquireAbout: {
     type: String,
-	enum: ['pay 100', 'payroll submission', 'payroll outsourcing services', 'online FTP backup', 'other'],
     required: true
   },
   message: {
