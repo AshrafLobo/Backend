@@ -37,9 +37,6 @@ router.post('/', async (req, res) => {
     <li>Company: ${company}</li>
     <li>Number of employees: ${numberOfEmployees || "N/A"}</li>
   </ol>
-
-  <h3>Message</h3>
-  <p>${message}</p>
 `;
 
   const { error } = validate(req.body);
