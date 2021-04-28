@@ -18,7 +18,7 @@ module.exports = async function (output, subject, receivers) {
   // send mail with defined transport object
   try {
     let info = await transporter.sendMail({
-      from: `"Comprite Email Test" <${config.get('user.user')}>`, // sender address
+      from: `"Comprite Email" <${config.get('user.user')}>`, // sender address
       to: receivers, // list of receivers
       subject: subject, // Subject line
       text: "Hello world?", // plain text body
