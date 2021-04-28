@@ -42,7 +42,7 @@ router.post('/', async (req, res) => {
 
   const formData = new ContactUsForm(_.pick(req.body, ['firstName', 'lastName', 'email', 'phoneNumber', 'subject', 'message']));
   await formData.save();
-  sendEmail(output, "Contact us form request");
+  sendEmail(output, "Contact us form request", "info@comp-rite.com, ashraflobo@gmail.com");
   res.send(formData);
 });
 

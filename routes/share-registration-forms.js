@@ -47,7 +47,7 @@ router.post('/', async (req, res) => {
 
   const formData = new ShareRegistrationForm(_.pick(req.body, ['firstName', 'lastName', 'email', 'phoneNumber', 'address', 'idNumber', 'cdscNumber', 'company', 'service', 'message']));
   await formData.save();
-  sendEmail(output, "Share registration form request");
+  sendEmail(output, "Share registration form request", "info@comp-rite.com, shares@comp-rite.com, operations@comp-rite.com");
   res.send(formData);
 });
 

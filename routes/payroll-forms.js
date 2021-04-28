@@ -49,7 +49,7 @@ router.post('/', async (req, res) => {
 
   const formData = new PayrollForm(_.pick(req.body, ['firstName', 'lastName', 'email', 'phoneNumber', 'company', 'jobTitle', 'numberOfEmployees', 'enquireAbout', 'message']));
   await formData.save();
-  sendEmail(output, "Payroll form request");
+  sendEmail(output, "Payroll form request", "info@comp-rite.com, pay100@comp-rite.com");
   res.send(formData);
 });
 
