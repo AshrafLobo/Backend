@@ -44,7 +44,7 @@ router.post('/', async (req, res) => {
 
   const formData = new PayrollDownloadForm(_.pick(req.body, ['firstName', 'lastName', 'email', 'phoneNumber', 'company', 'numberOfEmployees']));
   await formData.save();
-  sendEmail(output, "Payroll download form request", "ashraflobo@gmail.com");
+  sendEmail(output, "Payroll download form request", "info@comp-rite.com, pay100@comp-rite.com");
   res.send(formData);
 });
 
