@@ -54,9 +54,10 @@ router.get('/:companyId', async (req, res) => {
 
   if (!issuer) return res.status(404).send('The issuer with the given Id was not found');
 
-  let issuerArray = { ...issuer }
+  let issuerArray = { ...issuer['_doc'] }
   issuerArray["src"] = `${req.protocol}://${req.headers.host}/${issuerArray["src"].replace("\\", "\/")}`;
   issuerArray['src_small'] = `${req.protocol}://${req.headers.host}/${issuerArray["src_small"].replace("\\", "\/")}`;
+  
   res.send(issuerArray);
 });
 
