@@ -29,20 +29,20 @@ module.exports = function (app) {
   app.use('/articles', express.static('articles'))
 
   /** API Routes Mapping */
-  app.use('/api/issuers', issuers);
-  app.use('/api/news', news);
-  app.use('/api/timelines', timelines);
-  app.use('/api/agms', agms);
-  app.use('/api/egms', egms);
-  app.use('/api/dividends', dividends);
-  app.use('/api/users', users);
-  app.use('/api/auth', auth);
+  app.use('/issuers', issuers);
+  app.use('/news', news);
+  app.use('/timelines', timelines);
+  app.use('/agms', agms);
+  app.use('/egms', egms);
+  app.use('/dividends', dividends);
+  app.use('/users', users);
+  app.use('/auth', auth);
 
   /** Forms API Routes Mapping */
-  app.use('/api/payroll-forms', payroll_forms);
-  app.use('/api/payroll-downloads-forms', payroll_download_forms);
-  app.use('/api/contact-us', contact_us_forms);
-  app.use('/api/share-registration-forms', share_registration_forms);
+  app.use('/payroll-forms', payroll_forms);
+  app.use('/payroll-downloads-forms', payroll_download_forms);
+  app.use('/contact-us', contact_us_forms);
+  app.use('/share-registration-forms', share_registration_forms);
 
   /** Middleware - After Route Call */
   app.use(error)
