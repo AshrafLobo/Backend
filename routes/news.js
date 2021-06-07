@@ -78,7 +78,7 @@ router.get('/:newsId', async (req, res) => {
   const newsArticle = await getNewsArticle(article.article_src);
   article = article.toObject();
   article.newsArticle = newsArticle;
-
+  article.issuer.src_small = `https://ashraflobo.co.uk/api/${issuerArray["src_small"].replace("\\", "\/")}`;
   if (!article) return res.status(404).send('The news article with the given ID was not found');
   res.send(article);
 });

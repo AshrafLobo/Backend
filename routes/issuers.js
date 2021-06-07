@@ -42,8 +42,8 @@ router.get('/', async (req, res, next) => {
   let issuerArray = [...issuers]
 
   issuerArray.forEach(issuer => {
-    issuer["src"] = `${api_url + issuer["src"].replace("\\", "\/")}`;
-    issuer['src_small'] = `${api_url + issuer["src_small"].replace("\\", "\/")}`;
+    issuer["src"] = api_url + issuer["src"].replace("\\", "\/");
+    issuer['src_small'] = api_url + issuer["src_small"].replace("\\", "\/");
   });
 
   res.send(issuerArray);
@@ -56,8 +56,8 @@ router.get('/:companyId', async (req, res) => {
   if (!issuer) return res.status(404).send('The issuer with the given Id was not found');
 
   let issuerArray = { ...issuer['_doc'] }
-  issuerArray["src"] = `${api_url + issuerArray["src"].replace("\\", "\/")}`;
-  issuerArray['src_small'] = `${api_url + issuerArray["src_small"].replace("\\", "\/")}`;
+  issuerArray["src"] = api_url + issuerArray["src"].replace("\\", "\/");
+  issuerArray['src_small'] = api_url + issuerArray["src_small"].replace("\\", "\/");
   res.send(issuerArray);
 });
 
