@@ -37,7 +37,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-const api_url = "https://ashraflobo.co.uk/api/"
+const api_url = "http://13.244.154.208/api/"
 
 /**
  * API Routes
