@@ -61,6 +61,10 @@ router.get('/', async (req, res) => {
     const date = article._id.getTimestamp();
     article.date = date;
     article.dateCreated = dateFormat(date, "ddd, mmmm d, yyyy");
+
+    if (article.original_postDate)
+      article.original_postDate = dateFormat(article.original_postDate, "ddd, mmmm d, yyyy");
+
     article.timeCreated = dateFormat(date, "shortTime");;
   }
 
@@ -88,7 +92,7 @@ router.post('/', [upload.single('article_src'), auth], async (req, res) => {
   const issuer = await Issuer.findById(req.body.issuerId);
   if (!issuer) return res.status(400).send("Invalid issuer.");
 
-  let article = _.pick(req.body, ['title']);
+  let article = _.pick(req.body, ['title', 'original_src', 'original_postDate']);
   article['article_src'] = req.file.path;
   article.issuer = _.pick(issuer, ['_id', 'name', 'title', 'src_small']);
   article = new News(article);
@@ -106,7 +110,7 @@ router.put('/:newsId', [upload.single('article_src'), auth], async (req, res) =>
   const issuer = await Issuer.findById(req.body.issuerId);
   if (!issuer) return res.status(400).send("Invalid issuer.");
 
-  let article = _.pick(req.body, ['title']);
+  let article = _.pick(req.body, ['title', 'original_src', 'original_postDate']);
   article['article_src'] = req.file.path;
   article.issuer = _.pick(issuer, ['_id', 'name', 'title', 'src_small']);
   article = await News.findByIdAndUpdate(req.params.newsId, article, { new: true });
@@ -120,7 +124,7 @@ router.delete('/:newsId', auth, async (req, res) => {
   const article = await News.findByIdAndDelete(req.params.newsId);
   if (!article) return res.status(404).send('The news article with the given ID was not found');
 
-  res.send(`The news artical was deleted successfully`);
+  res.send(`The news article was deleted successfully`);
 });
 
 module.exports = router;

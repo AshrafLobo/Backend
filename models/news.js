@@ -12,6 +12,12 @@ const News = mongoose.model('News', mongoose.Schema({
   article_src: {
     type: String
   },
+  original_src: {
+    type: String
+  },
+  original_postDate: {
+    type: Date
+  },
   issuer: {
     type: new mongoose.Schema({
       name: {

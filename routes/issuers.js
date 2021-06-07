@@ -41,10 +41,10 @@ router.get('/', async (req, res, next) => {
   let issuerArray = [...issuers]
 
   issuerArray.forEach(issuer => {
-    //issuer["src"] = `${req.protocol}://${req.headers.host}/${issuer["src"].replace("\\", "\/")}`;
-    //issuer['src_small'] = `${req.protocol}://${req.headers.host}/${issuer["src_small"].replace("\\", "\/")}`;
-	issuer["src"] = `https://ashraflobo.co.uk/api/${issuer["src"].replace("\\", "\/")}`;
-    issuer['src_small'] = `https://ashraflobo.co.uk/api/${issuer["src_small"].replace("\\", "\/")}`;
+    issuer["src"] = `${req.protocol}://${req.headers.host}/api/${issuer["src"].replace("\\", "\/")}`;
+    issuer['src_small'] = `${req.protocol}://${req.headers.host}/api/${issuer["src_small"].replace("\\", "\/")}`;
+    // issuer["src"] = `https://ashraflobo.co.uk/api/${issuer["src"].replace("\\", "\/")}`;
+    // issuer['src_small'] = `https://ashraflobo.co.uk/api/${issuer["src_small"].replace("\\", "\/")}`;
   });
 
   res.send(issuerArray);
@@ -57,10 +57,10 @@ router.get('/:companyId', async (req, res) => {
   if (!issuer) return res.status(404).send('The issuer with the given Id was not found');
 
   let issuerArray = { ...issuer['_doc'] }
-  //issuerArray["src"] = `${req.protocol}://${req.headers.host}/${issuerArray["src"].replace("\\", "\/")}`;
-  //issuerArray['src_small'] = `${req.protocol}://${req.headers.host}/${issuerArray["src_small"].replace("\\", "\/")}`;
-  issuerArray["src"] = `https://ashraflobo.co.uk/api/${issuerArray["src"].replace("\\", "\/")}`;
-  issuerArray['src_small'] = `https://ashraflobo.co.uk/api/${issuerArray["src_small"].replace("\\", "\/")}`;
+  issuerArray["src"] = `${req.protocol}://${req.headers.host}/api/${issuerArray["src"].replace("\\", "\/")}`;
+  issuerArray['src_small'] = `${req.protocol}://${req.headers.host}/api/${issuerArray["src_small"].replace("\\", "\/")}`;
+  // issuerArray["src"] = `https://ashraflobo.co.uk/api/${issuerArray["src"].replace("\\", "\/")}`;
+  // issuerArray['src_small'] = `https://ashraflobo.co.uk/api/${issuerArray["src_small"].replace("\\", "\/")}`;
   res.send(issuerArray);
 });
 

@@ -22,6 +22,8 @@ function validateNews(news) {
   const schema = Joi.object({
     title: Joi.string().min(5).max(255).required(),
     article_src: Joi.string(),
+    original_src: Joi.string(),
+    original_postDate: Joi.date().max('now'),
     issuerId: Joi.objectId().required()
   });
 
