@@ -36,6 +36,9 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+
+const api_url = "https://ashraflobo.co.uk/api/"
+
 /**
  * API Routes
  */
@@ -65,7 +68,8 @@ router.get('/', async (req, res) => {
     if (article.original_postDate)
       article.original_postDate = dateFormat(article.original_postDate, "ddd, mmmm d, yyyy");
 
-    article.timeCreated = dateFormat(date, "shortTime");;
+    article.timeCreated = dateFormat(date, "shortTime");
+    article.issuer.src_small = api_url + article.issuer["src_small"].replace("\\", "\/");
   }
 
   res.send(articles);
@@ -74,12 +78,13 @@ router.get('/', async (req, res) => {
 // Get one news article
 router.get('/:newsId', async (req, res) => {
   let article = await News.findById(req.params.newsId);
+  if (!article) return res.status(404).send('The news article with the given ID was not found');
 
   const newsArticle = await getNewsArticle(article.article_src);
   article = article.toObject();
   article.newsArticle = newsArticle;
-  article.issuer.src_small = `https://ashraflobo.co.uk/api/${issuerArray["src_small"].replace("\\", "\/")}`;
-  if (!article) return res.status(404).send('The news article with the given ID was not found');
+  article.issuer.src_small = api_url + article.issuer["src_small"].replace("\\", "\/");
+
   res.send(article);
 });
 
