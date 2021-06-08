@@ -54,7 +54,7 @@ router.get('/', async (req, res) => {
   let articles = await News
     .find(filter)
     .lean()
-    .sort('-_id')
+    .sort('-original_postDate')
     .select();
 
   for (const article of articles) {
